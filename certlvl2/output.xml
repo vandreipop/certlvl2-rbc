@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.7.5 on win32)" generated="20220630 11:03:35.464" rpa="true" schemaversion="3">
+<suite id="s1" name="Tasks" source="c:\Users\E1417798\Downloads\Robots\certlvl2\tasks.robot">
+<test id="s1-t1" name="Order Processing Bot" line="27">
+<kw name="Intializing steps">
+<kw name="Does Directory Exist" library="RPA.FileSystem">
+<var>${reciept_folder}</var>
+<arg>c:\\Users\\E1417798\\Downloads\\Robots\\certlvl2${/}receipts</arg>
+<doc>Returns True if the given directory exists, False if not.</doc>
+<msg timestamp="20220630 11:03:38.215" level="INFO">${reciept_folder} = True</msg>
+<status status="PASS" starttime="20220630 11:03:38.210" endtime="20220630 11:03:38.220"/>
+</kw>
+<kw name="Does Directory Exist" library="RPA.FileSystem">
+<var>${robots_folder}</var>
+<arg>c:\\Users\\E1417798\\Downloads\\Robots\\certlvl2${/}robots</arg>
+<doc>Returns True if the given directory exists, False if not.</doc>
+<msg timestamp="20220630 11:03:38.225" level="INFO">${robots_folder} = True</msg>
+<status status="PASS" starttime="20220630 11:03:38.221" endtime="20220630 11:03:38.226"/>
+</kw>
+<if>
+<branch type="IF" condition="'${reciept_folder}'=='True'">
+<kw name="Remove and add empty directory">
+<arg>c:\\Users\\E1417798\\Downloads\\Robots\\certlvl2${/}receipts</arg>
+<kw name="Remove Directory" library="RPA.FileSystem">
+<arg>${folder}</arg>
+<arg>True</arg>
+<doc>Removes the given directory, and optionally everything it contains.</doc>
+<status status="PASS" starttime="20220630 11:03:38.240" endtime="20220630 11:03:38.243"/>
+</kw>
+<kw name="Create Directory" library="RPA.FileSystem">
+<arg>${folder}</arg>
+<doc>Creates a directory and (optionally) non-existing parent directories.</doc>
+<status status="PASS" starttime="20220630 11:03:38.244" endtime="20220630 11:03:38.247"/>
+</kw>
+<status status="PASS" starttime="20220630 11:03:38.237" endtime="20220630 11:03:38.248"/>
+</kw>
+<status status="PASS" starttime="20220630 11:03:38.236" endtime="20220630 11:03:38.249"/>
+</branch>
+<branch type="ELSE">
+<kw name="Create Directory" library="RPA.FileSystem">
+<arg>c:\\Users\\E1417798\\Downloads\\Robots\\certlvl2${/}receipts</arg>
+<doc>Creates a directory and (optionally) non-existing parent directories.</doc>
+<status status="NOT RUN" starttime="20220630 11:03:38.252" endtime="20220630 11:03:38.253"/>
+</kw>
+<status status="NOT RUN" starttime="20220630 11:03:38.250" endtime="20220630 11:03:38.254"/>
+</branch>
+<status status="PASS" starttime="20220630 11:03:38.234" endtime="20220630 11:03:38.255"/>
+</if>
+<if>
+<branch type="IF" condition="'${robots_folder}'=='True'">
+<kw name="Remove and add empty directory">
+<arg>c:\\Users\\E1417798\\Downloads\\Robots\\certlvl2${/}robots</arg>
+<kw name="Remove Directory" library="RPA.FileSystem">
+<arg>${folder}</arg>
+<arg>True</arg>
+<doc>Removes the given directory, and optionally everything it contains.</doc>
+<status status="PASS" starttime="20220630 11:03:38.260" endtime="20220630 11:03:38.263"/>
+</kw>
+<kw name="Create Directory" library="RPA.FileSystem">
+<arg>${folder}</arg>
+<doc>Creates a directory and (optionally) non-existing parent directories.</doc>
+<status status="PASS" starttime="20220630 11:03:38.283" endtime="20220630 11:03:38.288"/>
+</kw>
+<status status="PASS" starttime="20220630 11:03:38.258" endtime="20220630 11:03:38.293"/>
+</kw>
+<status status="PASS" starttime="20220630 11:03:38.256" endtime="20220630 11:03:38.294"/>
+</branch>
+<branch type="ELSE">
+<kw name="Create Directory" library="RPA.FileSystem">
+<arg>c:\\Users\\E1417798\\Downloads\\Robots\\certlvl2${/}robots</arg>
+<doc>Creates a directory and (optionally) non-existing parent directories.</doc>
+<status status="NOT RUN" starttime="20220630 11:03:38.297" endtime="20220630 11:03:38.300"/>
+</kw>
+<status status="NOT RUN" starttime="20220630 11:03:38.295" endtime="20220630 11:03:38.303"/>
+</branch>
+<status status="PASS" starttime="20220630 11:03:38.255" endtime="20220630 11:03:38.306"/>
+</if>
+<status status="PASS" starttime="20220630 11:03:38.204" endtime="20220630 11:03:38.317"/>
+</kw>
+<kw name="Download the csv file">
+<kw name="Get Value From User" library="Dialogs">
+<var>${file_url}</var>
+<arg>Please enter the csv file url</arg>
+<arg>https://robotsparebinindustries.com/orders.csv</arg>
+<doc>Pauses execution and asks user to input a value.</doc>
+<msg timestamp="20220630 11:03:46.192" level="INFO">${file_url} = https://robotsparebinindustries.com/</msg>
+<status status="PASS" starttime="20220630 11:03:38.328" endtime="20220630 11:03:46.193"/>
+</kw>
+<kw name="Download" library="RPA.HTTP">
+<arg>${file_url}</arg>
+<arg>orders.csv</arg>
+<arg>overwrite=True</arg>
+<doc>An alias for the ``HTTP Get`` keyword.</doc>
+<msg timestamp="20220630 11:03:46.199" level="INFO">Creating a new HTTP session</msg>
+<msg timestamp="20220630 11:03:46.200" level="INFO">Creating Session using : alias=rpasession_alias.httpsrobotsparebinindustries.com, url=https://robotsparebinindustries.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220630 11:03:46.195" endtime="20220630 11:03:46.577"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2 seconds</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20220630 11:03:48.589" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20220630 11:03:46.579" endtime="20220630 11:03:48.589"/>
+</kw>
+<status status="PASS" starttime="20220630 11:03:38.324" endtime="20220630 11:03:48.595"/>
+</kw>
+<kw name="Read the order file">
+<var>${data}</var>
+<kw name="Read table from CSV" library="RPA.Tables">
+<var>${data}</var>
+<arg>c:\\Users\\E1417798\\Downloads\\Robots\\certlvl2${/}orders.csv</arg>
+<arg>header=True</arg>
+<doc>Read a CSV file as a table.</doc>
+<msg timestamp="20220630 11:03:48.655" level="INFO">${data} = Table(columns=[], rows=0)</msg>
+<status status="PASS" starttime="20220630 11:03:48.609" endtime="20220630 11:03:48.656"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" starttime="20220630 11:03:48.657" endtime="20220630 11:03:48.658"/>
+</return>
+<msg timestamp="20220630 11:03:48.661" level="INFO">${data} = Table(columns=[], rows=0)</msg>
+<status status="PASS" starttime="20220630 11:03:48.595" endtime="20220630 11:03:48.661"/>
+</kw>
+<kw name="Open the website">
+<kw name="Get Secret" library="RPA.Robocloud.Secrets">
+<var>${website}</var>
+<arg>websitedata</arg>
+<doc>Read a secret from the configured source, e.g. Robocorp Vault,
+and return it as a ``Secret`` object.</doc>
+<msg timestamp="20220630 11:03:48.670" level="INFO">Protecting keyword: RPA.Robocloud.Secrets.Get Secret</msg>
+<msg timestamp="20220630 11:03:48.679" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="FAIL" starttime="20220630 11:03:48.668" endtime="20220630 11:03:48.677"/>
+</kw>
+<kw name="Open Available Browser" library="RPA.Browser">
+<arg>${website}[url]</arg>
+<doc>Attempts to open a browser on the user's device from a set of
+supported browsers. Automatically downloads a corresponding webdriver
+if none is already installed.</doc>
+<status status="NOT RUN" starttime="20220630 11:03:48.680" endtime="20220630 11:03:48.681"/>
+</kw>
+<kw name="Maximize Browser Window" library="RPA.Browser">
+<doc>Maximizes current browser window.</doc>
+<status status="NOT RUN" starttime="20220630 11:03:48.682" endtime="20220630 11:03:48.684"/>
+</kw>
+<status status="FAIL" starttime="20220630 11:03:48.663" endtime="20220630 11:03:48.689"/>
+</kw>
+<kw name="Processing the orders">
+<arg>${data}</arg>
+<status status="NOT RUN" starttime="20220630 11:03:48.691" endtime="20220630 11:03:48.692"/>
+</kw>
+<kw name="Zip the receipts folder">
+<status status="NOT RUN" starttime="20220630 11:03:48.693" endtime="20220630 11:03:48.693"/>
+</kw>
+<kw name="Close Browser" library="RPA.Browser" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20220630 11:03:48.696" endtime="20220630 11:03:48.698"/>
+</kw>
+<status status="FAIL" starttime="20220630 11:03:38.198" endtime="20220630 11:03:48.701">KeyError: 'Missing required environment variable: RC_API_SECRET_HOST'</status>
+</test>
+<doc>Order robots from robotsparebin industries
+Save the receipt HTML in a pdf file
+Take screenshot of robot and attach in pdf file
+Zip the all receipts</doc>
+<status status="FAIL" starttime="20220630 11:03:35.474" endtime="20220630 11:03:48.708"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tasks</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Tasks">Tasks</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20220630 11:03:36.701" level="WARN">This is a deprecated import that will be removed in favor of RPA.Browser.Selenium</msg>
+<msg timestamp="20220630 11:03:38.162" level="WARN">This is a deprecated import that will be removed in favor of RPA.Robocorp.Vault</msg>
+</errors>
+</robot>
